@@ -18,4 +18,4 @@ R language
  - library(readr) for loading data
  - library(dplyr) for data manipulation
  - library(ggplot2) for data visualization graphics
- - library(caret) for analyzing feature importance
+ - library (skimr) for data exploration
