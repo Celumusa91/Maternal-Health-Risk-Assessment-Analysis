@@ -95,3 +95,18 @@ clean_data <- data %>%
          select(-Age) %>% 
          na.omit()
 ```
+### Data Analysis
+
+```
+ - Does Blood Sugar (BS) signicantly predict Risk Level? (Visualization and regression modelling)
+
+```R
+ggplot(clean_data)+
+  geom_boxplot(mapping = aes(`Risk Level`, BS, fill = `Risk Level`))+
+  coord_flip()+
+  labs(title = "The relationship between Risk Level and Blood Sugar")
+
+model_BS <- glm(`Risk Level`~ BS, 
+                data = clean_data, family = binomial)
+summary(model_BS)
+```
