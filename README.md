@@ -136,12 +136,11 @@ model_HS <- glm(`Risk Level`~ `Heart Rate` + `Systolic BP`, data = clean_data,
 summary(model_HS)
 ```
 
- - Which factors among Age, BMI, and Mental Health best predict Risk Level?
+ - Which factors among Age, BMI, BS and Mental Health best predict Risk Level?
 
 ```R
-model <- glm(`Risk Level`~ Age + BMI + BS +`Mental Health`,
-             data = clean_data, family = binomial)
-
-summary(model)
+model_best_predict <- train(`Risk Level`~ Age + BMI + BS + `Mental Health`,
+                            data = clean_data, model = "glm")
+varImp(model_best_predict)
 ```
 
