@@ -100,3 +100,48 @@ model_Age <- glm(`Risk Level` ~ Age, data = clean_data,
                  family = binomial)
 ```
 
+ - What is the relationship between BMI and Risk Level?
+
+```R
+ggplot(clean_data)+
+  geom_jitter(mapping = aes(`Risk Level`, BMI), width = 0.2, color = "red")+
+  labs(title = "The relationship between Risk Level and BMI")
+
+model_BMI <- glm(`Risk Level`~ BMI, data = clean_data,
+                 family = binomial)
+
+summary(model_BMI)
+```
+
+ - Do Previous Clomplications increase the likelihood of High Risk Level?
+
+```R
+ggplot(clean_data)+
+  geom_bar(mapping = aes(`Previous Complications`, fill = `Risk Level`),
+           position = "dodge")+
+  labs(title = "The relationship between Risk Level and Previous Complications")
+
+model_PC <- glm(`Risk Level`~ `Previous Complications`, data = clean_data,
+                family = binomial)
+
+summary(model_PC)
+```
+
+- How do Heart Rate and Systolic BP together influence Risk Level?
+
+```R
+model_HS <- glm(`Risk Level`~ `Heart Rate` + `Systolic BP`, data = clean_data,
+                family = binomial)
+
+summary(model_HS)
+```
+
+ - Which factors among Age, BMI, and Mental Health best predict Risk Level?
+
+```R
+model <- glm(`Risk Level`~ Age + BMI + BS +`Mental Health`,
+             data = clean_data, family = binomial)
+
+summary(model)
+```
+
