@@ -144,3 +144,26 @@ model_best_predict <- train(`Risk Level`~ Age + BMI + BS + `Mental Health`,
 varImp(model_best_predict)
 ```
 
+### Results and Findings
+---
+
+1. Does Blood Sugar (BS) signicantly predict Risk Level?
+   - 
+
+2. Does Age signicantly predict Risk Level?
+   - 
+
+3. What is the relationship between BMI and Risk Level?
+   - 
+
+4. Do Previous Clomplications increase the likelihood of High Risk Level?
+   - 
+
+5. How do Heart Rate and Systolic BP together influence Risk Level?
+   -
+
+6. Which factors among Age, BMI, and Mental Health best predict Risk Level?
+   -
+
+### Recommendations
+
