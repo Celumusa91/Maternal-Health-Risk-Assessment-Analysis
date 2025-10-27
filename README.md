@@ -50,30 +50,9 @@ data <- data %>%
                              BS))
 
 data <- data %>% 
-         mutate(BMI = if_else(is.na(BMI),
-                              median(BMI, na.rm = T),
-                              BMI))
-
-data <- data %>% 
-         mutate(AgeGroup = case_when(
-                  Age <= 14 ~ "10-14",
-                  Age <= 19 ~ "15-19",
-                  Age <= 24 ~ "20-24",
-                  Age <= 29 ~ "25-29",
-                  Age <= 34 ~ "30-34",
-                  Age <= 39 ~ "35-39",
-                  Age <= 44 ~ "40-44",
-                  Age <= 49 ~ "45-49",
-                  Age <= 54 ~ "50-54",
-                  Age <= 59 ~ "55-59",
-                  Age <= 65 ~ "60+"
-         )) %>% 
-         mutate(AgeGroup = factor(AgeGroup, levels = c("10-14", "15-19",
-                                                       "20-24", "25-29",
-                                                       "30-34", "35-39",
-                                                       "40-44", "45-49",
-                                                       "50-54", "55-59",
-                                                       "60+")))
+         mutate(`Heart Rate` = if_else(is.na(`Heart Rate`),
+                                       mean(`Heart Rate`, na.rm = T),
+                                     `Heart Rate`))
 ```
  - data cleaning (Recoding character indicators and converting to factor)
 ```R
@@ -95,9 +74,8 @@ clean_data <- data %>%
          select(-Age) %>% 
          na.omit()
 ```
-### Data Analysis
+### Data Analysis (Visualization and regression modelling)
 
-```
  - Does Blood Sugar (BS) signicantly predict Risk Level? (Visualization and regression modelling)
 
 ```R
@@ -110,3 +88,15 @@ model_BS <- glm(`Risk Level`~ BS,
                 data = clean_data, family = binomial)
 summary(model_BS)
 ```
+
+ - Does Blood Age signicantly predict Risk Level?
+
+```R
+ggplot(clean_data)+
+  geom_boxplot(mapping = aes(`Risk Level`, Age, fill = `Risk Level`))+
+  labs(title = "The relationship between Risk Level and Age")
+
+model_Age <- glm(`Risk Level` ~ Age, data = clean_data,
+                 family = binomial)
+```
+
