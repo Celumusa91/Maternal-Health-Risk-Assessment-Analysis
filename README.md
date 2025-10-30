@@ -158,15 +158,18 @@ varImp(model_best_predict)
 
 
 3. What is the relationship between BMI and Risk Level?
+   - Maternal women's Body Mass Index is a statistically significant predictor of Risk Level [pvalue < 0.05].
+   - High Risk maternal women has the highest median Body Mass Index values than the Low Risk women.
+   - The positive coefficient of 0.37841 means that as Body Mass Index increases, the odds of being in the High Risk level also increases.
+   - One Unit increase in Body Mass Index maternal woman, the likelihood of her being in the High Risk category is 0.37841.
+
+5. Do Previous Clomplications increase the likelihood of High Risk Level?
    - 
 
-4. Do Previous Clomplications increase the likelihood of High Risk Level?
-   - 
-
-5. How do Heart Rate and Systolic BP together influence Risk Level?
+6. How do Heart Rate and Systolic BP together influence Risk Level?
    -
 
-6. Which factors among Age, BMI, and Mental Health best predict Risk Level?
+7. Which factors among Age, BMI, and Mental Health best predict Risk Level?
    -
 
 ### Recommendations
