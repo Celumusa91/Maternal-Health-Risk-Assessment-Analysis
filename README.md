@@ -148,12 +148,14 @@ varImp(model_best_predict)
 ---
 
 1. Does Blood Sugar (BS) signicantly predict Risk Level?
+   - Maternal women's Blood Sugar is a statistically significant predictor of Risk Level [pvalue < 0.05]
+   - High Risk Maternal women has the highest median Blood Sugar values than the Low Risk women.
+   - The coefficient of 0.93987 means that as Blood Sugar increases, the odds of being in the High Risk level increases.
+2. Does Age signicantly predict Risk Level?
    - Age is a statistically significant predictor of Risk Level [pvalue < 0.05].
    - High Maternal Risk women have higher median Age value than those from the Low Risk women.
    - For every one year increase in Age, the log-odds of a woman being in the High Risk category increases by 0.0437.
 
-2. Does Age signicantly predict Risk Level?
-   - 
 
 3. What is the relationship between BMI and Risk Level?
    - 
