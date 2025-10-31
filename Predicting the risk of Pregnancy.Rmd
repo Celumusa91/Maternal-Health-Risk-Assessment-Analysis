@@ -1,0 +1,197 @@
+---
+title: "Predicting the risk of pregnancy"
+author: "Celumusa Fakudze"
+date: "2025-10-22"
+output: html_document
+---
+
+Data loading and examination
+```{r}
+library(readr)
+data <- read_csv("C:/Users/Fakudze/Downloads/archive (31).zip")
+View(data)
+```
+
+```{r}
+library(skimr)
+skim(data)
+```
+
+
+# Data cleaning 
+
+Reviewing Age variable(Checking for outliers and replacing them)
+```{r}
+library(tidyverse)
+boxplot(data$Age, main = "Boxplot fopr outliers detection on Age")
+```
+
+## Cleaning Systolic BP variable (checking for outliers and replacing them 
+```{r}
+boxplot(data$`Systolic BP`, main = "Boxplot for outlier detection on Systolic BP")
+
+data <- data %>% 
+         mutate(`Systolic BP` = if_else(is.na(`Systolic BP`),
+                                        median(`Systolic BP`, na.rm = T),
+                                        `Systolic BP`))
+```
+
+
+## Cleaning Diastolic variable (checking for outliers and replacing them
+```{r}
+boxplot(data$Diastolic, main = "Boxplot for detecting outliers on Diastolic")
+
+data <- data %>% 
+         mutate(Diastolic = if_else(is.na(Diastolic),
+                                    median(Diastolic, na.rm = T),
+                                    Diastolic))
+```
+
+
+## Cleaning BS variable (checking for outliers and replacing them)
+```{r}
+boxplot(data$BS, main = "Boxplot for detecting outliers on BS")
+
+data <- data %>% 
+         mutate(BS = if_else(is.na(BS),
+                             median(BS, na.rm = T),
+                             BS))
+```
+
+
+## Cleaning BMI variable (checking for outliers and replacing them)
+```{r}
+boxplot(data$BMI, main = "boxplot for outlier detection on BMI")
+
+data <- data %>% 
+  mutate(BMI = if_else(is.na(BMI),
+                       median(BMI),
+                       BMI))
+
+```
+
+## Cleaning Heart Rate variable (checking for outliers and replacing them)
+```{r}
+boxplot(data$`Heart Rate`, main = "Barplot for detecting outliers on Heart Rate")
+
+data <- data %>% 
+         mutate(`Heart Rate` = if_else(is.na(`Heart Rate`),
+                                       mean(`Heart Rate`, na.rm = T),
+                                     `Heart Rate`))
+
+```
+
+### Recoding character indicators and converting to factor
+```{r}
+library(dplyr)
+data <- data %>% 
+         mutate(across(c(`Preexisting Diabetes`, `Gestational Diabetes`,
+                         `Mental Health`, `Previous Complications`),
+                       as.factor))
+data <- data %>% 
+  mutate(`Risk Level` = factor(`Risk Level`, levels = c("Low", "High")))
+         
+```
+
+## Replacing Missing values with Unknown in factor variables
+```{r}
+library(forcats)
+data <- data %>% 
+         mutate(across(c(`Preexisting Diabetes`, `Gestational Diabetes`,
+                         `Mental Health`, `Previous Complications`), ~ fct_explicit_na(as.factor(.), na_level
+                                                          = "Unknown")))
+```
+
+## Extracting clean data for analysis
+```{r}
+clean_data <- data %>% 
+         na.omit()
+
+skim(clean_data)
+```
+## Checking for class imbalance on Risk Level 
+```{r}
+table(clean_data$`Risk Level`)
+```
+
+# Data Analysis
+
+## Does Blood Sugar (BS) signicantly predict Risk Level?
+```{r}
+ggplot(clean_data)+
+  geom_boxplot(mapping = aes(`Risk Level`, Age, fill = `Risk Level`))+
+  labs(title = "The relationship between Risk Level and Age")
+
+model_Age <- glm(`Risk Level` ~ Age, data = clean_data,
+                 family = binomial)
+summary(model_Age)
+```
+The boxplot visual shows that woman from the High Risk category have higher median Age value than those from the Low Risk category. The logistic model reveals that for every one year increase in Age, the log-odds of a woman being in the High Risk category increases by 0.0437. Age is a statistically significant predictor of Risk Level.
+
+## Does Blood Sugar (BS) signicantly predict Risk Level?
+```{r}
+ggplot(clean_data)+
+  geom_boxplot(mapping = aes(`Risk Level`, BS, fill = `Risk Level`))+
+  coord_flip()+
+  labs(title = "The relationship between Risk Level and Blood Sugar")
+
+model_BS <- glm(`Risk Level`~ BS, 
+                data = clean_data, family = binomial)
+summary(model_BS)
+```
+The box plot reveals that the High Risk group has the highest median Blood Sugar values than the Low Risk Group. The results from this model reveals that Blood Sugar is a statistical significant predictor of Risk Level. The coefficient of 0.93987 means that as Blood Sugar increases, the odds of being in the High Risk level increases. 
+
+
+## What is the relationship between BMI and Risk Level?
+```{r}
+ggplot(clean_data)+
+  geom_jitter(mapping = aes(`Risk Level`, BMI), width = 0.2, color = "red")+
+  labs(title = "The relationship between Risk Level and BMI")
+
+model_BMI <- glm(`Risk Level`~ BMI, data = clean_data,
+                 family = binomial)
+
+summary(model_BMI)
+```
+The box plot reveals that the High Risk group has the highest median Body Mass Index values than the Low Risk Group. The results from this model reveals that a pregnant woman's Body Mass Index is a statistical significant predictor of Risk Level. The positive coefficient of 0.37841 means that as Body Mass Index increases, the odds of being in the High Risk level also increases. One Unit increase in Body Mass Index maternal woman, the likelihood of her being in the High Risk category is 0.37841.
+
+## Do Previous Clomplications increase the likelihood of High Risk Level
+```{r}
+ggplot(clean_data)+
+  geom_bar(mapping = aes(`Previous Complications`, fill = `Risk Level`),
+           position = "dodge")+
+  labs(title = "The relationship between Risk Level and Previous Complications")
+
+model_PC <- glm(`Risk Level`~ `Previous Complications`, data = clean_data,
+                family = binomial)
+
+summary(model_PC)
+```
+The estimate of 4.50037 means that, compared to the reference group (Previous Complications 0), the log-odds of being in the High Risk Level increase by 4.50037 when previous Complications is 1. Also, The estimate of 14.54499 means that, compared to the reference group (Previous Complications 0), the log-odds of being in the High Risk Level increase by 14.54499 when previous Complications is Unknown.
+
+## How do Heart Rate and Systolic BP together influence Risk Level
+```{r}
+model_HS <- glm(`Risk Level`~ `Heart Rate` + `Systolic BP`, data = clean_data,
+                family = binomial)
+
+summary(model_HS)
+```
+The results from this model reveals that a pregnant woman's Heart Rate is a statistical significant predictor of Risk Level. The positive coefficient of 0.168549 means that as Heart Rate increases, the odds of being in the High Risk level also increases. One Unit increase in Heart Rate of maternal woman, the likelihood of her being in the High Risk category is 0.168549.
+
+The results from this model reveals that a pregnant woman's Systolic BP is a statistical significant predictor of Risk Level. The positive coefficient of 0.034087 means that as Systolic BP increases, the odds of being in the High Risk level also increases. One Unit increase in Systolic BP of maternal woman, the likelihood of her being in the High Risk category is 0.034087.
+
+
+## Which factors among Age, BS, BMI, and Mental Health best predict Risk Level?
+```{r}
+library(caret)
+library(randomForest)
+model <- glm(`Risk Level`~ Age + BMI + BS +`Mental Health`,
+             data = clean_data, family = binomial)
+
+summary(model)
+
+model_best_predict <- train(`Risk Level`~ Age + BMI + BS + `Mental Health`,
+                            data = clean_data, model = "glm")
+varImp(model_best_predict)
+```
+Maternal woman's Body Mass Index and Blood Sugar are the best predictors of Maternal Risk Level on women while Mental Health and the women' Age are the least to none predictors.
