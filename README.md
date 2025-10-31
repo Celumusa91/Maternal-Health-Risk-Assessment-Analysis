@@ -177,4 +177,7 @@ varImp(model_best_predict)
    -Maternal woman’s Body Mass Index and Blood Sugar are the best predictors of Maternal Risk Level while Mental Health and the women’ Age are the least to none predictors.
 
 ### Recommendations
+---
+1. Impliment routine blood sugar screening and early intervention programs for all pregnant women as part of standard maternal care.
+2. 
 
