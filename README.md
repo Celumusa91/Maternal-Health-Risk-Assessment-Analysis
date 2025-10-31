@@ -189,6 +189,6 @@ varImp(model_best_predict)
 This analysis reveals that implimenting routine blood sugar screening and early intervention programs for all pregnant women as part of standard maternal care since maternal women' blood sugar is a positve predictor of maternal risk. Strengthening targeted maternal health services for older pregnant women through risk-based antenatal care and counselling. integrate nutritional screening and weight management counselling into routine antenatal care to reduce maternal risk associated with high Body Mass Index. Relevant stakeholders shoul establish a maternal risk tracking system to ensure women with previous pregnancy complications receive specialized and contious care in subsiquent pregnancies. 
 
 
-To view analysis report [see here](https://celumusa91.github.io/Life-expectancy-Analysis/Life-expectancy-analysis.html)
+To view analysis report [see here](https://celumusa91.github.io/Maternal-Health-Risk-Assessment-Analysis/Predicting-the-risk-of-Pregnancy.html)
 
 To download my R code [download here](https://celumusa91.github.io/Maternal-Health-Risk-Assessment-Analysis/Predicting%20the%20risk%20of%20Pregnancy.Rmd)
