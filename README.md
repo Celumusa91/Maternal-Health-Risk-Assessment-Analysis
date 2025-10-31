@@ -181,5 +181,5 @@ varImp(model_best_predict)
 1. The government shoul impliment routine blood sugar screening and early intervention programs for all pregnant women as part of standard maternal care.
 2. The government should strengthen targeted maternal health services for older pregnant women through risk-based antenatal care and counselling.
 3. The government should integrate nutritional screening and weight management counselling into routine antenatal care to reduce maternal risk associated with high Body Mass Index.
-4. 
+4. Establish a maternal risk tracking system to ensure women with previous pregnancy complications receive specialized and contious care in subsiquent pregnancies. 
 
