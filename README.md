@@ -169,10 +169,12 @@ varImp(model_best_predict)
    - The estimate of 14.54499 means that, compared to the reference group (Previous Complications 0), the log-odds of being in the High Risk Level increase by 14.54499 when previous Complications is Unknown.
 
 6. How do Heart Rate and Systolic BP together influence Risk Level?
-   -
+   - Heart Rate and Systolic BP are statistically significant predictors of maternal Risk Level on women.
+   - One Unit increase in Heart Rate of maternal woman, the likelihood of her being in the High Risk category is 0.168549.
+   - One Unit increase in Systolic BP of maternal woman, the likelihood of her being in the High Risk category is 0.034087.
 
 7. Which factors among Age, BMI, and Mental Health best predict Risk Level?
-   -
+   -Maternal woman’s Body Mass Index and Blood Sugar are the best predictors of Maternal Risk Level while Mental Health and the women’ Age are the least to none predictors.
 
 ### Recommendations
 
