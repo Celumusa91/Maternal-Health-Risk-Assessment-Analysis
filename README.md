@@ -164,7 +164,9 @@ varImp(model_best_predict)
    - One Unit increase in Body Mass Index maternal woman, the likelihood of her being in the High Risk category is 0.37841.
 
 5. Do Previous Clomplications increase the likelihood of High Risk Level?
-   - 
+   -  Previous Clomplicationsis a statistically significant predictor of Risk Level [pvalue < 0.05].
+   - The estimate of 4.50037 means that, compared to the reference group (Previous Complications 0), the log-odds of being in the High Risk Level increase by 4.50037 when previous Complications is 1.
+   - The estimate of 14.54499 means that, compared to the reference group (Previous Complications 0), the log-odds of being in the High Risk Level increase by 14.54499 when previous Complications is Unknown.
 
 6. How do Heart Rate and Systolic BP together influence Risk Level?
    -
