@@ -178,6 +178,7 @@ varImp(model_best_predict)
 
 ### Recommendations
 ---
-1. Impliment routine blood sugar screening and early intervention programs for all pregnant women as part of standard maternal care.
-2. 
+1. The government shoul impliment routine blood sugar screening and early intervention programs for all pregnant women as part of standard maternal care.
+2. The government should strengthen targeted maternal health services for older pregnant women through risk-based antenatal care and counselling.
+3. 
 
